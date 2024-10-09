@@ -8,7 +8,6 @@ let computerChoice;
 
 function getComputerChoice() {
     computerChoice = Math.floor((Math.random() * 3)+1 );
-    console.log(computerChoice);
     switch (computerChoice) {
         case 1:
             computerChoice = 'rock';
@@ -22,12 +21,114 @@ function getComputerChoice() {
         }
         return computerChoice;
     }
-getComputerChoice()
 
 //Function for Human choices
-    // Prompt for choices
-    // Capture response and store in variable
-    // then initiate logic check (next function)
+let humanChoice;
+
+function getHumanChoice() {
+    // collect response from human
+    humanChoice = prompt("Enter your desired play");
+    // set to lowercase for comparison
+    humanChoice = humanChoice.toLowerCase();
+    return humanChoice;
+}
+
+// Play Game Function for 5 rounds
+
+function playGame() {
+    // Declare Score Variables
+    let playerScore = 0;
+    let computerScore = 0;
+
+    //Counts number of rounds
+    let roundNumber = 0;
+
+    // Function for play round
+    function playRound(human,computer) {
+        roundNumber += 1;
+
+        // Debug values 
+        console.log(`Human: ${humanChoice}`);
+        console.log(`Computer: ${computerChoice}`);
+        console.log(`Round: ${roundNumber}`);
+
+    // Checks if human answer is valid
+    if (human != 'rock' && human != 'scissors' && human != 'paper') {
+        console.log ("Invalid Choice");
+
+    // Decides Round winner
+    } else {
+            switch (human) {
+                case "rock":
+                    switch (computer) {
+                        case "rock": 
+                            console.log('It is a tie');
+                            break;
+                        case "scissors":
+                            console.log('You win. Rock beats scissors');
+                            playerScore += 1;
+                            break;
+                        case "paper":
+                            console.log ('You lose. Paper beats rock.')
+                            computerScore += 1;
+                            break;
+                    }
+                    break;
+                case "scissors":
+                    switch (computer) {
+                        case "scissors": 
+                            console.log('It is a tie');
+                            break;
+                        case "rock":
+                            console.log('You lose. Rock beats scissors');
+                            computerScore += 1;
+                            break;
+                        case "paper":
+                            console.log ('You win. Scissors beats rock.')
+                            playerScore += 1;
+                            break;
+                    }   
+                    break;
+                case "paper":
+                    switch (computer) {
+                        case "paper": 
+                            console.log('It is a tie');
+                            break;
+                        case "rock":
+                            console.log('You win. Paper beats rock');
+                            playerScore += 1;
+                            break;
+                        case "scissors":
+                            console.log ('You lose. Scissors beats paper.')
+                            computerScore += 1;
+                            break;
+                    }   
+                    break;
+            }
+        } 
+    }
+
+    // Calls PlayRound Function
+    while (roundNumber <5 ) {
+        playRound(playerSelection, computerSelection)
+    }
+    //Displays Final Score
+    console.log(`The scores are player: ${playerScore} and computer: ${computerScore}`);
+
+    // Display winner text
+    if (playerScore > computerScore) {
+        console.log("Congrats you win!");
+    } else {
+        console.log("The computer beat you");
+    }
+}
+
+const playerSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+playGame();
+
+
+
 
 
 
@@ -48,8 +149,13 @@ getComputerChoice()
 
 // need to start next round
 
+//Running the functions
+    // player function
+    // game outcome function
+    //score keeper function
+    //reset game 
 
 
 //Debug -- Print
-console.log(computerChoice);
-
+// console.log(`Human: ${humanChoice}`);
+// console.log(`Computer: ${computerChoice}`);
