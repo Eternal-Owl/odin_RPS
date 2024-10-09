@@ -47,20 +47,25 @@ function playGame() {
     function playRound(human,computer) {
         roundNumber += 1;
 
+        //Capture responses
+        getHumanChoice();
+        getComputerChoice();
+        
+
         // Debug values 
         console.log(`Human: ${humanChoice}`);
         console.log(`Computer: ${computerChoice}`);
         console.log(`Round: ${roundNumber}`);
 
     // Checks if human answer is valid
-    if (human != 'rock' && human != 'scissors' && human != 'paper') {
+    if (humanChoice != 'rock' && humanChoice != 'scissors' && humanChoice != 'paper') {
         console.log ("Invalid Choice");
 
     // Decides Round winner
     } else {
-            switch (human) {
+            switch (humanChoice) {
                 case "rock":
-                    switch (computer) {
+                    switch (computerChoice) {
                         case "rock": 
                             console.log('It is a tie');
                             break;
@@ -75,7 +80,7 @@ function playGame() {
                     }
                     break;
                 case "scissors":
-                    switch (computer) {
+                    switch (computerChoice) {
                         case "scissors": 
                             console.log('It is a tie');
                             break;
@@ -90,7 +95,7 @@ function playGame() {
                     }   
                     break;
                 case "paper":
-                    switch (computer) {
+                    switch (computerChoice) {
                         case "paper": 
                             console.log('It is a tie');
                             break;
@@ -110,7 +115,7 @@ function playGame() {
 
     // Calls PlayRound Function
     while (roundNumber <5 ) {
-        playRound(playerSelection, computerSelection)
+        playRound()
     }
     //Displays Final Score
     console.log(`The scores are player: ${playerScore} and computer: ${computerScore}`);
@@ -118,13 +123,12 @@ function playGame() {
     // Display winner text
     if (playerScore > computerScore) {
         console.log("Congrats you win!");
-    } else {
+    } else if (playerScore < computerScore) {
         console.log("The computer beat you");
+    } else {
+        console.log ("It is a tie");
     }
 }
-
-const playerSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 playGame();
 
 
