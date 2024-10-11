@@ -1,10 +1,10 @@
-//scope:
-// Game of rock paper scissors in which the player is prompted to enter a value and is against a computer
-// a full game will last 5 rounds
-
-
 // Function for computer result
 let computerChoice;
+let playerChoice;
+
+// Set scores
+let playerScore = 0;
+let computerScore = 0;
 
 function getComputerChoice() {
     computerChoice = Math.floor((Math.random() * 3)+1 );
@@ -22,48 +22,23 @@ function getComputerChoice() {
         return computerChoice;
     }
 
-//Function for Human choices
-let humanChoice;
+// Function for play round
+function playRound() {
 
-function getHumanChoice() {
-    // collect response from human
-    humanChoice = prompt("Enter your desired play");
-    // set to lowercase for comparison
-    humanChoice = humanChoice.toLowerCase();
-    return humanChoice;
-}
+    getComputerChoice();
+    
 
-// Play Game Function for 5 rounds
-
-function playGame() {
-    // Declare Score Variables
-    let playerScore = 0;
-    let computerScore = 0;
-
-    //Counts number of rounds
-    let roundNumber = 0;
-
-    // Function for play round
-    function playRound(human,computer) {
-        roundNumber += 1;
-
-        //Capture responses
-        getHumanChoice();
-        getComputerChoice();
-        
-
-        // Debug values 
-        console.log(`Human: ${humanChoice}`);
-        console.log(`Computer: ${computerChoice}`);
-        console.log(`Round: ${roundNumber}`);
+    // Debug values 
+    console.log(`Human: ${playerChoice}`);
+    console.log(`Computer: ${computerChoice}`);
 
     // Checks if human answer is valid
-    if (humanChoice != 'rock' && humanChoice != 'scissors' && humanChoice != 'paper') {
+    if (playerChoice != 'rock' && playerChoice != 'scissors' && playerChoice != 'paper') {
         console.log ("Invalid Choice");
 
     // Decides Round winner
     } else {
-            switch (humanChoice) {
+            switch (playerChoice) {
                 case "rock":
                     switch (computerChoice) {
                         case "rock": 
@@ -109,57 +84,40 @@ function playGame() {
                             break;
                     }   
                     break;
-            }
-        } 
-    }
+            } } 
+} // end function for play round
 
-    // Calls PlayRound Function
-    while (roundNumber <5 ) {
-        playRound()
-    }
-    //Displays Final Score
-    console.log(`The scores are player: ${playerScore} and computer: ${computerScore}`);
+// Listening for start game button
+const startGame = document.getElementById('playRound');
 
-    // Display winner text
-    if (playerScore > computerScore) {
-        console.log("Congrats you win!");
-    } else if (playerScore < computerScore) {
-        console.log("The computer beat you");
-    } else {
-        console.log ("It is a tie");
-    }
-}
-playGame();
+startGame.addEventListener('click', function() {
+    // Adjusting header text
+    const header = document.querySelector('h1.mainHeader');
+    header.textContent = "Select an option!"
+    // Remove start Button
+    const removeStart = document.querySelectorAll(`button`);
+    removeStart.forEach(button => button.remove());
 
+    // Create option buttons
+    const container = document.querySelector('.buttonContainer');
+    const rpsButtonLabels = [`Rock`,`Paper`,`Scissors`];
 
+    rpsButtonLabels.forEach((label) => {
+        const rpsButtons = document.createElement(`button`);
 
-
-
-
-//Function for deciding winner
-// Need to determine who wins what 
-// Rock beats scissors
-// scissors beats paper
-// paper beats rock
-// if values === then the round is a draw
+        rpsButtons.textContent = label;
+        container.appendChild(rpsButtons);
+    })
+    
 
 
-//score keeping function
-    // define variables for:
-        // Human Score
-        // Computer Score
-        //Return Scores H - C
+
+// listen for response
+
+// on response -> set based  on button text
 
 
-// need to start next round
-
-//Running the functions
-    // player function
-    // game outcome function
-    //score keeper function
-    //reset game 
 
 
-//Debug -- Print
-// console.log(`Human: ${humanChoice}`);
-// console.log(`Computer: ${computerChoice}`);
+});
+

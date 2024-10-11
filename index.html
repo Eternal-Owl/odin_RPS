@@ -4,9 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style> 
+    h1 {
+        text-align: center;
+
+    }
+    .buttonContainer {
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    </style>
 </head>
 <body>
-<script src="rps.js"></script>
+<h1 class="mainHeader"> Rock - Paper - Scissors</h1>
+<container class="results"></container>
+<container class="buttonContainer"> 
+    <button id="playRound"> Play Round </button>
+</container>
 
+<script src="rps.js"></script>
 </body>
 </html>
